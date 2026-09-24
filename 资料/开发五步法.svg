@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420" role="img">
+<title>嵌入式功能开发五步法</title>
+<desc>画状态图、定阻塞或轮询、定义事件接口留 stub、搭骨架先跑通、逐状态填肉逐个验证。</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="#888780"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect x="0" y="0" width="680" height="420" fill="#FFFFFF"/>
+
+<g>
+  <rect x="170" y="20" width="340" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="340" y="40" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">1. 画状态图</text>
+  <text x="340" y="58" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0F6E56">列状态、列事件，纸笔画转移，不写代码</text>
+</g>
+<path d="M340,72 V96" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g>
+  <rect x="170" y="100" width="340" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="340" y="120" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">2. 定阻塞还是轮询</text>
+  <text x="340" y="138" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0F6E56">每个状态要同时响应几件事？大于1就非阻塞</text>
+</g>
+<path d="M340,152 V176" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g>
+  <rect x="170" y="180" width="340" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="340" y="200" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">3. 定义事件接口</text>
+  <text x="340" y="218" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0F6E56">硬件没就绪就留 stub，结构先定死</text>
+</g>
+<path d="M340,232 V256" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g>
+  <rect x="170" y="260" width="340" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="340" y="280" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">4. 搭骨架先跑通</text>
+  <text x="340" y="298" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0F6E56">主循环：刷新显示 → 采事件 → 分发，空壳先编译烧录</text>
+</g>
+<path d="M340,312 V336" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g>
+  <rect x="170" y="340" width="340" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="340" y="360" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">5. 逐状态填肉</text>
+  <text x="340" y="378" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0F6E56">填一个状态，验证一个，不贪多</text>
+</g>
+</svg>

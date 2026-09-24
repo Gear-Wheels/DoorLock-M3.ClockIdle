@@ -1,0 +1,19 @@
+# Keil 编译产物
+Objects/
+Listings/
+
+# Keil 用户界面配置(各人机器不同,不传)
+*.uvguix.*
+DebugConfig/
+
+# 调试/构建临时文件
+*.bak
+*.dep
+JLinkLog.txt
+build_rebuild.txt
+
+# 本地备份目录(云端仓库本身就是备份)
+Backup_before_fix_*/
+
+# WorkBuddy 工作区数据
+.workbuddy/
