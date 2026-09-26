@@ -23,6 +23,10 @@
 /*初始化函数*/
 void OLED_Init(void);
 
+/*开关屏函数（低功耗用）*/
+void OLED_DisplayOff(void);
+void OLED_DisplayOn(void);
+
 /*更新函数*/
 void OLED_Update(void);
 void OLED_UpdateArea(int16_t X, int16_t Y, uint8_t Width, uint8_t Height);

@@ -280,6 +280,30 @@ void OLED_Init(void)
 }
 
 /**
+  * 函    数：OLED关闭显示（熄屏）
+  * 参    数：无
+  * 返 回 值：无
+  * 说    明：写入0xAE命令关闭显示，屏幕熄灭但不丢失显存内容。
+  *           用于低功耗场景：待机熄屏省电，唤醒后调 OLED_DisplayOn 即可恢复。
+  */
+void OLED_DisplayOff(void)
+{
+	OLED_WriteCommand(0xAE);	//设置显示关闭，0xAE关闭，0xAF开启
+}
+
+/**
+  * 函    数：OLED开启显示（亮屏）
+  * 参    数：无
+  * 返 回 值：无
+  * 说    明：写入0xAF命令开启显示，恢复之前熄灭的屏幕。
+  *           与 OLED_DisplayOff 配对使用，用于低功耗唤醒后的亮屏。
+  */
+void OLED_DisplayOn(void)
+{
+	OLED_WriteCommand(0xAF);	//设置显示开启，0xAE关闭，0xAF开启
+}
+
+/**
   * 函    数：OLED设置显示光标位置
   * 参    数：Page 指定光标所在的页，范围：0~7
   * 参    数：X 指定光标所在的X轴坐标，范围：0~127

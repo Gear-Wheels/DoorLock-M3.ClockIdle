@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--no-multibyte-chars</MiscControls>
-              <Define>USE_STDPERIPH_DRIVER</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
               <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware</IncludePath>
             </VariousControls>
@@ -716,6 +716,66 @@
               <FileName>menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>MKey.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\MKey.c</FilePath>
+            </File>
+            <File>
+              <FileName>MKey.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MKey.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodedLock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\CodedLock.c</FilePath>
+            </File>
+            <File>
+              <FileName>CodedLock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\CodedLock.h</FilePath>
+            </File>
+            <File>
+              <FileName>as608.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\as608.c</FilePath>
+            </File>
+            <File>
+              <FileName>as608.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\as608.h</FilePath>
+            </File>
+            <File>
+              <FileName>fingerprint.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\fingerprint.c</FilePath>
+            </File>
+            <File>
+              <FileName>fingerprint.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\fingerprint.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\usart2.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\usart2.h</FilePath>
+            </File>
+            <File>
+              <FileName>LowPower.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\LowPower.c</FilePath>
+            </File>
+            <File>
+              <FileName>LowPower.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\LowPower.h</FilePath>
             </File>
           </Files>
         </Group>

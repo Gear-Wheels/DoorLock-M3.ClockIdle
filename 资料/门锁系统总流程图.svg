@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 1180" width="920" height="1180" role="img">
+<title>门锁系统总流程图</title>
+<desc>STM32F103C8 门锁裸机项目全功能流程图：上电初始化 → 时钟待机(活跃态/熄屏Stop两态) → 事件分发 → 一级菜单 → 各功能分支 → 超时退回。配色：蓝=初始化/系统，绿=菜单与选择，橙=判断，红=开锁/确认，灰=说明，紫=低功耗。</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="#888780"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect x="0" y="0" width="920" height="1180" fill="#FFFFFF"/>
+
+<text x="460" y="34" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="600" fill="#2C2C2A">门锁系统总流程图（STM32F103C8 裸机）</text>
+
+<text x="28" y="70" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="600" fill="#0C447C">① 上电初始化</text>
+
+<g>
+  <rect x="28" y="82" width="190" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="123" y="102" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#0C447C">OLED / Key / MKey / RTC</text>
+  <text x="123" y="120" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">各模块初始化</text>
+</g>
+<path d="M218,108 H250" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="250" y="82" width="200" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="350" y="102" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#0C447C">FR_Init() + LowPower_Init()</text>
+  <text x="350" y="120" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">AS608 握手 + EXTI 唤醒源</text>
+</g>
+<path d="M450,108 H490" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="490" y="82" width="190" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="585" y="102" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#0C447C">进入主循环 while(1)</text>
+  <text x="585" y="120" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">非阻塞轮询 + 状态机</text>
+</g>
+
+<path d="M585,134 V168" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="28" y="192" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="600" fill="#0C447C">② 时钟待机（活跃态：亮屏）</text>
+
+<g>
+  <rect x="460" y="168" width="260" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="590" y="186" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">IdleClock_Tick() 每秒刷时间</text>
+  <text x="590" y="204" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#0F6E56">同时监听：确认键 / 键盘 / 指纹</text>
+</g>
+<path d="M590,216 V254" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="460" y="254" width="260" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="590" y="272" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">event = Event_GetNum()</text>
+  <text x="590" y="290" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#0F6E56">事件抽象层（Key.c）</text>
+</g>
+
+<path d="M590,302 V344" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="590,346 690,388 590,430 490,388" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<text x="590" y="388" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#633806">event ?</text>
+
+<path d="M490,388 H360 V470" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="415" y="402" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">==3 确认键</text>
+
+<path d="M590,430 V470" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="600" y="452" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">==10 键盘</text>
+
+<path d="M690,388 H770 V470" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="700" y="402" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">==11 指纹</text>
+
+<path d="M590,430 V590" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="605" y="500" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">==0 无事件</text>
+
+<polygon points="590,592 668,624 590,656 512,624" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="590" y="624" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="500" fill="#3C3489">无操作 ≥ 12 秒？</text>
+
+<path d="M512,624 H470 V688" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="490" y="640" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#5F5E5A">否，继续轮询</text>
+
+<text x="28" y="716" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="600" fill="#534AB7">②·低功耗（熄屏态：Stop）</text>
+
+<g>
+  <rect x="430" y="690" width="320" height="48" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text x="590" y="708" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#3C3489">EnterStopMode()：熄屏 + 关外设 + 进 Stop</text>
+  <text x="590" y="726" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#534AB7">OLED 关 / USART2·TIM4 关 / PWR_EnterSTOPMode</text>
+</g>
+<path d="M590,738 V776" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="430" y="776" width="320" height="48" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text x="590" y="794" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#3C3489">EXTI 唤醒（板载键 / 指纹 WAK）</text>
+  <text x="590" y="812" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#534AB7">PB11/PB1/PA6 下降沿 + PA4 上升沿</text>
+</g>
+<path d="M590,824 V862" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="430" y="862" width="320" height="48" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text x="590" y="880" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#3C3489">ExitStopMode()：恢复时钟 + 亮屏</text>
+  <text x="590" y="898" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#534AB7">SystemInit 72MHz / OLED·USART2 重建 / 回待机</text>
+</g>
+
+<path d="M430,886 H300 V192 H460" fill="none" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="5,4"/>
+<text x="210" y="560" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#534AB7">唤醒 → 回活跃态</text>
+
+<text x="28" y="962" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="600" fill="#0C447C">③ 一级菜单分支</text>
+
+<g>
+  <rect x="180" y="472" width="180" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="270" y="490" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#085041">menu1() 一级菜单</text>
+  <text x="270" y="508" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#0F6E56">密码/指纹/手机/RFID/功能设置</text>
+</g>
+
+<g>
+  <rect x="490" y="472" width="180" height="48" rx="8" fill="#FBE9E7" stroke="#C0392B" stroke-width="0.5"/>
+  <text x="580" y="490" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#7A1F1F">CodedLock() 密码解锁</text>
+  <text x="580" y="508" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#9B3B2E">默认密码 952700</text>
+</g>
+
+<g>
+  <rect x="690" y="472" width="190" height="48" rx="8" fill="#FBE9E7" stroke="#C0392B" stroke-width="0.5"/>
+  <text x="785" y="490" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="14" font-weight="500" fill="#7A1F1F">menu2_fingerprint()</text>
+  <text x="785" y="508" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#9B3B2E">press_FR() 采集→搜索</text>
+</g>
+
+<path d="M270,520 V558" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="270,560 360,592 270,624 180,592" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<text x="270" y="592" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="500" fill="#633806">menu1 返回 choice</text>
+
+<path d="M180,592 H130 V990" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M250,592 H250 V1040" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M330,592 H390 V1040" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M360,592 H430 V1040" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M270,624 V990" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="150" y="620" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#5F5E5A">1 密码</text>
+<text x="238" y="620" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#5F5E5A">2 指纹</text>
+<text x="318" y="620" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#5F5E5A">3 手机</text>
+<text x="400" y="620" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#5F5E5A">4 RFID</text>
+<text x="282" y="640" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#5F5E5A">5 功能设置</text>
+
+<g>
+  <rect x="90" y="992" width="140" height="46" rx="8" fill="#FBE9E7" stroke="#C0392B" stroke-width="0.5"/>
+  <text x="160" y="1010" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#7A1F1F">menu2_password</text>
+  <text x="160" y="1028" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#9B3B2E">→ CodedLock</text>
+</g>
+
+<g>
+  <rect x="180" y="1042" width="140" height="46" rx="8" fill="#FBE9E7" stroke="#C0392B" stroke-width="0.5"/>
+  <text x="250" y="1060" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#7A1F1F">menu2_fingerprint</text>
+  <text x="250" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#9B3B2E">→ press_FR</text>
+</g>
+
+<g>
+  <rect x="320" y="1042" width="140" height="46" rx="8" fill="#EDEDEB" stroke="#888780" stroke-width="0.5"/>
+  <text x="390" y="1060" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#5F5E5A">menu2_Phone</text>
+  <text x="390" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#888780">预留</text>
+</g>
+
+<g>
+  <rect x="360" y="1042" width="140" height="46" rx="8" fill="#EDEDEB" stroke="#888780" stroke-width="0.5"/>
+  <text x="430" y="1060" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#5F5E5A">menu2_RFID</text>
+  <text x="430" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#888780">预留</text>
+</g>
+
+<g>
+  <rect x="220" y="992" width="170" height="46" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="305" y="1010" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="500" fill="#085041">menu2_config 功能设置</text>
+  <text x="305" y="1028" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#0F6E56">密码修改/指纹设置/RFID设置</text>
+</g>
+
+<path d="M390,992 H540 V1042" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<g>
+  <rect x="540" y="1000" width="170" height="42" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="625" y="1016" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" font-weight="500" fill="#085041">ChangePassword 密码修改</text>
+  <text x="625" y="1034" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#0F6E56">验证→输新→确认→成功</text>
+</g>
+
+<g>
+  <rect x="540" y="1050" width="170" height="42" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text x="625" y="1066" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" font-weight="500" fill="#085041">menu3_fpconfig 指纹设置</text>
+  <text x="625" y="1084" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#0F6E56">三级菜单</text>
+</g>
+
+<g>
+  <rect x="720" y="1050" width="170" height="42" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="805" y="1066" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" font-weight="500" fill="#0C447C">View / Add / Del_FR</text>
+  <text x="805" y="1084" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#5F5E5A">查看 / 录入 / 删除</text>
+</g>
+
+<path d="M710,1071 H720" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="28" y="1124" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#5F5E5A">④ 菜单层无操作 4 秒 → return -1 逐层上抛 → 回待机；待机层无操作 12 秒 → 熄屏进 Stop → EXTI 唤醒回活跃态</text>
+<text x="28" y="1152" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#888780">红色=开锁/确认　蓝色=初始化　绿色=菜单　橙=判断　紫=低功耗　灰=预留/说明</text>
+</svg>
